@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visa Checker and Application</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="scripts.js" defer></script>
+
+
+    <script>
+        function checkVisa() {
+            const country = document.getElementById("country").value;
+            let message = "";
+
+            switch (country) {
+                case "USA":
+                    message = "Visa required for most applicants.";
+                    break;
+                case "Canada":
+                    message = "Visa required unless you have an eTA.";
+                    break;
+                case "India":
+                    message = "Visa required before travel.";
+                    break;
+                case "UK":
+                    message = "Visa depends on the duration of stay.";
+                    break;
+                case "Australia":
+                    message = "eVisa available for eligible travelers.";
+                    break;
+                default:
+                    message = "Please select a country.";
+            }
+
+            document.getElementById("visaResult").innerText = message;
+        }
+
+        function validateForm() {
+            const passport = document.getElementById("passport").value;
+            const country = document.getElementById("visaCountry").value;
+            const messageElement = document.getElementById("applicationMessage");
+            let message = "";
+
+            if (!passport || !country) {
+                message = "All fields are required!";
+            } else if (passport.length < 8 || passport.length > 10) {
+                message = "Invalid passport number!";
+            } else {
+                message = "Visa application submitted successfully!";
+            }
+
+            messageElement.innerText = message;
+            return false; // Prevent form submission for demonstration
+        }
+    </script>
+</head>
+<body>
+    <h1>Visa Checker</h1>
+    <label for="country">Select your country:</label>
+    <select id="country">
+        <option value="">--Select--</option>
+        <option value="USA">USA</option>
+        <option value="Canada">Canada</option>
+        <option value="India">India</option>
+        <option value="UK">UK</option>
+        <option value="Australia">Australia</option>
+    </select>
+    <button onclick="checkVisa()">Check Visa</button>
+    <p id="visaResult"></p>
+
+    <h1>Visa Application</h1>
+    <form onsubmit="return validateForm()">
+        <label for="passport">Passport Number:</label>
+        <input type="text" id="passport" name="passport" required>
+        <br>
+        <label for="visaCountry">Select your country:</label>
+        <select id="visaCountry" name="country" required>
+            <option value="">--Select--</option>
+            <option value="USA">USA</option>
+            <option value="Canada">Canada</option>
+            <option value="India">India</option>
+            <option value="UK">UK</option>
+            <option value="Australia">Australia</option>
+        </select>
+        <br>
+        <button type="submit">Apply for Visa</button>
+    </form>
+    <p id="applicationMessage"></p>
+</body>
+</html>
